@@ -35,31 +35,9 @@ Enable execution of PowerShell scripts (Replace `CurrentUser` with your username
 PS> Set-ExecutionPolicy Unrestricted -Scope CurrentUser
 ```
 
-## Usage
-
-1. Run compressForm.ps1 to open the GUI
-
-```powershell
-.\compressForm.ps1
-```
-
-The following window should appear:
-
-![Main UI](assets/main_ui.png)
-
-2. Drag any video files you wish to compress into the list box. Only the shown supported video extensions are currently supported. More video extensions will be added in future releases.
-
-    Non-supported files will be rejected.
-
-3. Once all the target video files have been dragged in, press `Compress all` to begin compressing all of the listed video files. The compression process will be logged in the Powershell console the GUI is running from.
-
-    The resulting compressed video file will be found in the same directory as the source file with an appended `_compressed` added to the name. The original video file is **not modified**.
-
-Example:
-```
-Source file: C:\Videos\VideoClip.mp4
-Result file: C:\Videos\VideoClip_compressed.mp4
-```
+##Usage
+ - Set path, place videos, run the script vc_ps.ps1 using PowerShell 7
+ - Find compressed video with "old videoname + _compressed"
 
 ## Licenses
 
