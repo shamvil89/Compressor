@@ -1,6 +1,6 @@
 # Compressor
 
-A Powershell script written with a GUI to compress video files. This is done by using FFmpeg.
+A Powershell script written to compress video files. This is done by using FFmpeg.
 
  It is currently hard-coded to output a video file around a size of 8MB.
 
