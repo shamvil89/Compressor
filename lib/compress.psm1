@@ -45,7 +45,7 @@ Function Compress-VideoClip {
         # The path to the video you want to compress
         [string] $VideoPath,
         # The file size threshold we wish to compress the given video to (in MB).
-        [int] $Threshold = 7
+        [int] $Threshold = 50
     )
 
     begin {
@@ -92,7 +92,7 @@ Function Compress-VideoClip {
         [int] $CurrentFileSize = (Get-Item $ResolvedPath).length / 1MB
         $OriginalSizeRatio = (($CurrentFileSize * 8192) / $Duration) - 128
 
-        $AverageBitrate = (($Threshold * 8192) / $Duration) - 128
+        $AverageBitrate = ((($Threshold * 8192) / $Duration) - 128)
 
         # Round down to whole number
         $AverageBitrate = [Math]::Floor($AverageBitrate)
@@ -110,7 +110,7 @@ Function Compress-VideoClip {
         Write-Host "Starting pass 1"
         Invoke-Expression("${FFmpegPath} -v quiet -stats -y -i `"${VideoPath}`" -c:v libx264 -preset slow -b:v ${AverageBitrate}k -pass 1 -an -f mp4 NUL") -ErrorAction Stop
 
-        # Pass 2
+        # Pass 2 
         Write-Host "Starting pass 2"
         Invoke-Expression("${FFmpegPath} -v quiet -stats -y -i `"${VideoPath}`" -c:v libx264 -preset slow -b:v ${AverageBitrate}k -pass 2 -c:a aac -b:a 128k `"${PathFinal}`"") -ErrorAction Stop
     }
@@ -118,11 +118,10 @@ Function Compress-VideoClip {
     end {
         Foreach ($Item in $RemoveArray) {
             Write-Host "Removing file ${Item}"
-            Remove-Item $Item
+            #Remove-Item $Item
         }
         
         Write-Host "Compression complete!"
     }
 }
-
 
